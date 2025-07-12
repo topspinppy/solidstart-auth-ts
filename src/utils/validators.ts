@@ -35,3 +35,24 @@ export const validateRequest = async (request: Request) => {
   }
 
 };
+
+export function validateItemInput(
+  data: { title?: unknown; description?: unknown },
+  opts: { allowPartial?: boolean } = {}
+): string | null {
+  const { allowPartial = false } = opts;
+  const { title, description } = data;
+
+  if (!allowPartial || title !== undefined) {
+    if (typeof title !== "string" || title.trim() === "") {
+      return "Title is required";
+    }
+  }
+
+  if (description !== undefined && typeof description !== "string") {
+    return "Description must be a string";
+  }
+
+  // — All checks passed —
+  return null;
+}
