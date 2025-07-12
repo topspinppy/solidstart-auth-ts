@@ -1,7 +1,7 @@
 import { createAsync } from "@solidjs/router";
 import { createEffect, createSignal, Show } from "solid-js";
 import LoginForm, { FormData } from "~/components/LoginForm";
-import RegisterForm from "~/components/RegisterForm";
+import RegisterForm, { RegisterFormData } from "~/components/RegisterForm";
 import { redirectIfAuthenticated } from "~/lib/auth";
 
 type AuthMode = "login" | "register";
@@ -54,6 +54,31 @@ export default function Home() {
       setError("Network error, please try again");
     }
   };
+
+  const handleRegister = async (data: RegisterFormData) => {
+    setError(undefined);
+    try {
+      const res = await fetch("/api/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify(data),
+      });
+
+      if (!res.ok) {
+        const payload = await res.json();
+        setError(payload.message || "Register failed");
+        return;
+      }
+      
+      toggleMode()
+    } catch (error) {
+      console.error(error);
+      setError("Network error, please try again");
+    }
+  }
   
 
   return (
@@ -69,7 +94,7 @@ export default function Home() {
           </Show>
         </h2>
 
-        <Show when={authMode() === "login"} fallback={<RegisterForm />}>
+        <Show when={authMode() === "login"} fallback={<RegisterForm onSubmit={handleRegister}/>}>
           <LoginForm 
             onSubmit={handleLogin}
           />

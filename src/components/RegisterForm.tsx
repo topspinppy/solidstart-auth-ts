@@ -2,8 +2,7 @@ import { createForm, zodForm } from "@modular-forms/solid";
 import z from "zod";
 
 const baseSchema = z.object({
-  name: z.string().min(1, "Name is required"),
-  surname: z.string().min(1, "Surname is required"),
+  displayName: z.string().min(1, "Display Name is required"),
   email: z.string().email("Invalid email address").min(1, "Email is required"),
   password: z.string().min(6, "Password must be at least 6 characters"),
   confirmPassword: z.string().min(6, "Confirm Password must be at least 6 characters"),
@@ -17,14 +16,18 @@ const schema = baseSchema.refine((data) => data.password === data.confirmPasswor
   path: ["confirmPassword"] // This helps with field-specific error placement
 });
 
-type FormData = z.infer<typeof schema>;
+export type RegisterFormData = z.infer<typeof schema>;
 
-export default function RegisterForm() {
-  const [, { Form, Field }] = createForm<FormData>({
+interface IRegisterFormProps {
+  onSubmit: (values: RegisterFormData) => void;
+}
+
+export default function RegisterForm(props: IRegisterFormProps) {
+  const { onSubmit } = props
+  const [, { Form, Field }] = createForm<RegisterFormData>({
     validate: zodForm(schema),
     initialValues: {
-      name: "",
-      surname: "",
+      displayName: "",
       email: "",
       password: "",
       confirmPassword: "",
@@ -36,14 +39,12 @@ export default function RegisterForm() {
   return (
     <Form
       class="flex flex-col gap-5 sm:gap-6 py-6 sm:py-8"
-      onSubmit={(values) => {
-        console.log("Form submitted with values:", values);
-      }}
+      onSubmit={onSubmit}
     >
-      <Field name="name">
+      <Field name="displayName">
         {(field, props) => (
           <div>
-            <label class="block text-sm font-medium mb-1 text-white">Name</label>
+            <label class="block text-sm font-medium mb-1 text-white">Display Name</label>
             <input
               {...props}
               type="text"
@@ -57,22 +58,6 @@ export default function RegisterForm() {
         )}
       </Field>
 
-      <Field name="surname">
-        {(field, props) => (
-          <div>
-            <label class="block text-sm font-medium mb-1 text-white">Surname</label>
-            <input
-              {...props}
-              type="text"
-              placeholder="eg, Doe"
-              class="w-full px-4 py-2 rounded-lg bg-white/20 border border-white/30 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-purple-400"
-            />
-            {field.error && (
-              <p class="mt-1 text-sm text-red-500">{field.error}</p>
-            )}
-          </div>
-        )}
-      </Field>
 
       <Field name="email">
         {(field, props) => (
@@ -115,22 +100,6 @@ export default function RegisterForm() {
               {...props}
               type="password"
               placeholder="••••••••"
-              class="w-full px-4 py-2 rounded-lg bg-white/20 border border-white/30 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-purple-400"
-            />
-            {field.error && (
-              <p class="mt-1 text-sm text-red-500">{field.error}</p>
-            )}
-          </div>
-        )}
-      </Field>
-
-      <Field name="birthdate">
-        {(field, props) => (
-          <div>
-            <label class="block text-sm font-medium mb-1 text-white">Birthdate</label>
-            <input
-              {...props}
-              type="date"
               class="w-full px-4 py-2 rounded-lg bg-white/20 border border-white/30 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-purple-400"
             />
             {field.error && (
