@@ -27,7 +27,10 @@ export async function GET(event: APIEvent) {
     .offset(offset)
     .limit(limit)
     .get();
-
+  const snapshot = await db
+    .collection("items")
+    .where("ownerId", "==", userId).count()
+    .get();
   const items = snap.docs.map(doc => ({ id: doc.id, ...(doc.data() as any) }));
 
   // 6. ส่งกลับ พร้อม metadata พื้นฐาน
@@ -36,6 +39,7 @@ export async function GET(event: APIEvent) {
     pagination: {
       page,
       limit,
+      total: snapshot.data().count,
       count: items.length,
       hasMore: items.length === limit
     }

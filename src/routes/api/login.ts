@@ -50,7 +50,11 @@ export async function POST({ request }: APIEvent) {
       { expiresIn: "1h" }
     );
 
-    return successResponse("success", token);
+    return successResponse("success", token, {
+      headers: {
+        "Set-Cookie": `token=${token}; HttpOnly; Path=/; Max-Age=${60 * 60}; SameSite=Strict`,
+      }
+    });
 
   } catch (error) {
     if (error instanceof SyntaxError) {

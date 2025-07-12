@@ -1,12 +1,19 @@
+import { createAsync } from "@solidjs/router";
 import { createEffect, createSignal, Show } from "solid-js";
-import LoginForm from "~/components/LoginForm";
+import LoginForm, { FormData } from "~/components/LoginForm";
 import RegisterForm from "~/components/RegisterForm";
+import { redirectIfAuthenticated } from "~/lib/auth";
 
 type AuthMode = "login" | "register";
 
 export default function Home() {
   const [authMode, setAuthMode] = createSignal<AuthMode>("login");
+  const [error, setError] = createSignal<string>();
 
+  createAsync(() => {
+    return redirectIfAuthenticated();
+  })
+  
   createEffect(() => {
     const storedMode = sessionStorage.getItem("authMode") as AuthMode ;
     if (storedMode === 'register') {
@@ -23,6 +30,32 @@ export default function Home() {
     setAuthMode(authMode() === "login" ? "register" : "login");
   };
 
+  const handleLogin = async (values: FormData) => {
+    setError(undefined);
+    try {
+      const res = await fetch("/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify(values),
+      });
+
+      if (!res.ok) {
+        const payload = await res.json();
+        setError(payload.message || "Login failed");
+        return;
+      }
+      
+      window.location.href = '/dashboard';
+    } catch (error) {
+      console.error(error);
+      setError("Network error, please try again");
+    }
+  };
+  
+
   return (
     <div class="min-h-screen bg-gradient-to-tr from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center">
       <div
@@ -37,9 +70,13 @@ export default function Home() {
         </h2>
 
         <Show when={authMode() === "login"} fallback={<RegisterForm />}>
-          <LoginForm />
+          <LoginForm 
+            onSubmit={handleLogin}
+          />
         </Show>
-
+        <Show when={error()}>
+          <p class="text-red-500 text-sm mt-4">{error()}</p>
+        </Show>
         <p class="text-sm mt-6 text-center text-white/70">
           {authMode() === "login" ? (
             <>
