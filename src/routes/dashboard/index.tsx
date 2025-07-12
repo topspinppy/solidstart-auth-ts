@@ -4,6 +4,7 @@ import { createSignal, For, Show } from "solid-js";
 import { requireAuth } from "~/lib/auth";
 import useManageItems from "~/lib/composables/useManageItems";
 import useProfile from "~/lib/composables/useProfile";
+import DashboardLayout from "./layout";
 
 
 const logoutAction = action(async () => {
@@ -25,26 +26,7 @@ export default function Dashboard() {
   const navigate = useNavigate();
 
   return (
-    <div class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
-      {/* Header */}
-      <header class="bg-white shadow-sm border-b border-gray-200">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="flex justify-between items-center py-4">
-            <h1 class="text-2xl font-bold text-gray-900">Dashboard</h1>
-            <div class="flex items-center space-x-4">
-              <form action={logoutAction} method="post" class="inline">
-                <button
-                  type="submit"
-                  class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition-colors"
-                >
-                  Logout
-                </button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </header>
-
+    <DashboardLayout>
       <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Welcome Section */}
         <Show when={profile()} fallback={<div />}>
@@ -159,6 +141,6 @@ export default function Dashboard() {
           </div>
         </div>
       </main>
-    </div>
+    </DashboardLayout>
   );
 }
