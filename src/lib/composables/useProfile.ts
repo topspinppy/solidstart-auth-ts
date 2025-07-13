@@ -103,7 +103,6 @@ function useProfile(options: UseProfileOptions = {}) {
   // Auto-fetch on mount
   createEffect(() => {
     if (autoFetch) {
-      console.log("🔍 Fetching user profile on mount...");
       fetchProfile();
     }
   });

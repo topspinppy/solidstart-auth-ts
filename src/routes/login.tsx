@@ -82,7 +82,7 @@ export default function Home() {
   
 
   return (
-    <div class="min-h-screen bg-gradient-to-tr from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center">
+    <div class="min-h-screen bg-gradient-to-tr from-slate-900 via-black-900 to-gray-500 flex items-center justify-center">
       <div
         class="w-full max-w-md bg-white/10 border border-white/20 rounded-2xl shadow-2xl text-white
          px-6 sm:px-8 py-6 sm:py-8

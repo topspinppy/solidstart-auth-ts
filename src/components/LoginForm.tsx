@@ -38,7 +38,7 @@ export default function LoginForm(props: ILoginFormProps) {
             <input
               {...props}
               type="email"
-              class="w-full px-4 py-2 rounded-lg bg-white/20 border border-white/30 focus:outline-none focus:ring-2 focus:ring-purple-400 placeholder-white/60"
+              class="w-full px-4 py-2 rounded-lg bg-blue/20 border border-blue/30 focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-blue/60"
               placeholder="you@example.com"
               required
             />
@@ -55,7 +55,7 @@ export default function LoginForm(props: ILoginFormProps) {
             <input
               {...props}
               type="password"
-              class="w-full px-4 py-2 rounded-lg bg-white/20 border border-white/30 focus:outline-none focus:ring-2 focus:ring-purple-400 placeholder-white/60"
+              class="w-full px-4 py-2 rounded-lg bg-blue/20 border border-blue/30 focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-blue/60"
               placeholder="••••••••"
               required
             />
@@ -68,7 +68,7 @@ export default function LoginForm(props: ILoginFormProps) {
 
       <button
         type="submit"
-        class="w-full py-2 bg-purple-600 hover:bg-purple-500 transition duration-300 text-white font-semibold rounded-lg shadow-lg"
+        class="w-full py-2 bg-blue-600 hover:bg-blue-500 transition duration-300 text-white font-semibold rounded-lg shadow-lg cursor-pointer"
       >
         เข้าสู่ระบบ
       </button>

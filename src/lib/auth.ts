@@ -5,7 +5,6 @@ import { verifyAuthToken } from "~/utils/auth";
 
 export const requireAuth = query(async () => {
   "use server";
-  console.log("🔒 Checking authentication...");
   
   const event = getRequestEvent();
   const request = event?.request;
@@ -42,7 +41,6 @@ export const requireAuth = query(async () => {
 
 export const redirectIfAuthenticated = query(async () => {
   "use server";
-  console.log("🔍 Checking if user is already authenticated...");
   
   const event = getRequestEvent();
   const request = event?.request;
@@ -63,7 +61,6 @@ export const redirectIfAuthenticated = query(async () => {
     const token = sessionCookie.split('=')[1];
     const isValid = verifyAuthToken(token);
     if (isValid) {
-      console.log("✅ User already authenticated, redirecting to dashboard");
       throw redirect("/dashboard");
     }
     

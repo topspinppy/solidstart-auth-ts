@@ -44,12 +44,12 @@ export default function RegisterForm(props: IRegisterFormProps) {
       <Field name="displayName">
         {(field, props) => (
           <div>
-            <label class="block text-sm font-medium mb-1 text-white">Display Name</label>
+            <label class="block text-sm font-medium mb-1 text-blue">Display Name</label>
             <input
               {...props}
               type="text"
               placeholder="eg, John"
-              class="w-full px-4 py-2 rounded-lg bg-white/20 border border-white/30 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-purple-400"
+              class="w-full px-4 py-2 rounded-lg bg-blue/20 border border-blue/30 text-blue placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-blue-400"
             />
             {field.error && (
               <p class="mt-1 text-sm text-red-500">{field.error}</p>
@@ -62,12 +62,12 @@ export default function RegisterForm(props: IRegisterFormProps) {
       <Field name="email">
         {(field, props) => (
           <div>
-            <label class="block text-sm font-medium mb-1 text-white">Email</label>
+            <label class="block text-sm font-medium mb-1 text-blue">Email</label>
             <input
               {...props}
               type="email"
               placeholder="you@example.com"
-              class="w-full px-4 py-2 rounded-lg bg-white/20 border border-white/30 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-purple-400"
+              class="w-full px-4 py-2 rounded-lg bg-blue/20 border border-blue/30 text-blue placeholder-blue/60 focus:outline-none focus:ring-2 focus:ring-blue-400"
             />
             {field.error && (
               <p class="mt-1 text-sm text-red-500">{field.error}</p>
@@ -84,7 +84,7 @@ export default function RegisterForm(props: IRegisterFormProps) {
               {...props}
               type="password"
               placeholder="••••••••"
-              class="w-full px-4 py-2 rounded-lg bg-white/20 border border-white/30 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-purple-400"
+              class="w-full px-4 py-2 rounded-lg bg-blue/20 border border-blue/30 text-blue placeholder-blue/60 focus:outline-none focus:ring-2 focus:ring-blue-400"
             />
             {field.error && (
               <p class="mt-1 text-sm text-red-500">{field.error}</p>
@@ -100,7 +100,7 @@ export default function RegisterForm(props: IRegisterFormProps) {
               {...props}
               type="password"
               placeholder="••••••••"
-              class="w-full px-4 py-2 rounded-lg bg-white/20 border border-white/30 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-purple-400"
+              class="w-full px-4 py-2 rounded-lg bg-blue/20 border border-white/30 text-blue placeholder-blue/60 focus:outline-none focus:ring-2 focus:ring-blue-400"
             />
             {field.error && (
               <p class="mt-1 text-sm text-red-500">{field.error}</p>
@@ -117,7 +117,7 @@ export default function RegisterForm(props: IRegisterFormProps) {
               {...props}
               rows="3"
               placeholder="Tell us a bit about yourself..."
-              class="w-full px-4 py-2 rounded-lg bg-white/20 border border-white/30 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-purple-400"
+              class="w-full px-4 py-2 rounded-lg bg-blue/20 border border-blue/30 text-blue placeholder-blue/60 focus:outline-none focus:ring-2 focus:ring-blue-400"
             ></textarea>
             {field.error && (
               <p class="mt-1 text-sm text-red-500">{field.error}</p>
@@ -134,7 +134,7 @@ export default function RegisterForm(props: IRegisterFormProps) {
               {...props}
               type="url"
               placeholder="https://example.com/avatar.png"
-              class="w-full px-4 py-2 rounded-lg bg-white/20 border border-white/30 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-purple-400"
+              class="w-full px-4 py-2 rounded-lg bg-blue/20 border border-blue/30 text-white placeholder-blue/60 focus:outline-none focus:ring-2 focus:ring-blue-400"
             />
             {field.error && (
               <p class="mt-1 text-sm text-red-500">{field.error}</p>
@@ -145,7 +145,7 @@ export default function RegisterForm(props: IRegisterFormProps) {
 
       <button
         type="submit"
-        class="w-full py-2 bg-purple-600 hover:bg-purple-500 transition duration-300 text-white font-semibold rounded-lg shadow-lg"
+        class="w-full py-2 bg-blue-600 hover:bg-blue-500 transition duration-300 text-white font-semibold rounded-lg shadow-lg"
       >
         สมัครสมาชิก
       </button>

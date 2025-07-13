@@ -26,7 +26,7 @@ export default function DashboardLayout(props: { children: JSX.Element }) {
                 <form action={logoutAction} method="post" class="inline">
                   <button
                     type="submit"
-                    class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition-colors"
+                    class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition-colors cursor-pointer"
                   >
                     Logout
                   </button>

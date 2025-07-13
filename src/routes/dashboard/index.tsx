@@ -1,26 +1,15 @@
 // src/routes/dashboard.tsx
-import { action, createAsync, query, redirect, useNavigate } from "@solidjs/router";
-import { createSignal, For, Show } from "solid-js";
+import { createAsync, useNavigate } from "@solidjs/router";
+import { For, Show } from "solid-js";
 import { requireAuth } from "~/lib/auth";
 import useManageItems from "~/lib/composables/useManageItems";
 import useProfile from "~/lib/composables/useProfile";
 import DashboardLayout from "./layout";
 
-
-const logoutAction = action(async () => {
-  "use server";
-
-  // Clear the token cookie
-  return redirect("/login", {
-    headers: {
-      "Set-Cookie": "token=; HttpOnly; Path=/; Max-Age=0; SameSite=Strict",
-    }
-  });
-});
-
 export default function Dashboard() {
   // check authentication
   createAsync(() => requireAuth());
+  
   const { profile } = useProfile();
   const { items, loadMore, pagination } = useManageItems();
   const navigate = useNavigate();
@@ -94,9 +83,9 @@ export default function Dashboard() {
               </div>
               <button
                 onClick={() => navigate("/profile")}
-                class="mt-4 w-full bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg transition-colors"
+                class="mt-4 w-full bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg transition-colors cursor-pointer"
               >
-                View Full Profile
+                Edit Profile 
               </button>
             </div>
           </div>
@@ -107,8 +96,8 @@ export default function Dashboard() {
               <div class="flex justify-between items-center mb-4">
                 <h3 class="text-lg font-semibold text-gray-900">Your Items</h3>
                 <button
-                  onClick={() => navigate("/items/add")}
-                  class="bg-purple-500 hover:bg-purple-600 text-white py-2 px-4 rounded-lg transition-colors"
+                  onClick={() => navigate("/dashboard/add-item")}
+                  class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg transition-colors cursor-pointer"
                 >
                   Add New Item
                 </button>
@@ -131,7 +120,7 @@ export default function Dashboard() {
                 <Show when={pagination()?.hasMore}>
                 <button
                   onClick={() => loadMore()}
-                  class="mt-4 w-full bg-gray-100 hover:bg-gray-200 text-gray-800 py-2 px-4 rounded-lg transition-colors"
+                  class="mt-4 w-full bg-gray-100 hover:bg-gray-200 text-gray-800 py-2 px-4 rounded-lg transition-colors cursor-pointer"
                 >
                   ดูเพิ่มเติม
                 </button>

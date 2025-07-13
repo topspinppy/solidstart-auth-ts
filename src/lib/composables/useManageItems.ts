@@ -36,7 +36,6 @@ export default function useManageItems() {
       const newItems: Item[] = json.data.items || [];
 
       setItems(prev => (append ? [...prev, ...newItems] : newItems));
-      console.log(json.data.pagination);
       setPagination(json.data.pagination || null);
       setCurrentPage(page);
     } catch (err: any) {
